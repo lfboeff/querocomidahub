@@ -1,0 +1,738 @@
+{
+  "info": {
+    "name": "QueroComidaHub",
+    "description": "Tech Challenge 1 - FIAP - Pós-graduação em Arquitetura de Software e Desenvolvimento Java",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Happy Path",
+      "item": [
+        {
+          "name": "01 - Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "02 - Get Users - Filter by Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users?name=maria",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "maria"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "03 - Get Users - Filter by Full Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users?name=maria%20daiana",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "maria daiana"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "04 - Get Users - Filter by Name (No Results)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users?name=doesnotexist",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "doesnotexist"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "05 - Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"CUSTOMER\",\n  \"name\": \"José Francisco\",\n  \"email\": \"jose.francisco@email.com\",\n  \"login\": \"jose.francisco\",\n  \"password\": \"minhasenha123\",\n  \"address\": {\n    \"zipCode\": \"93310-100\",\n    \"countryCode\": \"BR\",\n    \"stateCode\": \"AM\",\n    \"city\": \"Manaus\",\n    \"street\": \"Rua Natureza\",\n    \"number\": \"321\",\n    \"complement\": \"Quadra 9, Casa 10\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "06 - Login (New User)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"jose.francisco\",\n  \"password\": \"minhasenha123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "07 - Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"RESTAURANT_OWNER\",\n  \"name\": \"Luís Boeff\",\n  \"email\": \"luis@email.com\",\n  \"login\": \"luis\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "08 - Update Address",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zipCode\": \"90035-190\",\n  \"countryCode\": \"BR\",\n  \"stateCode\": \"RS\",\n  \"city\": \"Porto Alegre\",\n  \"street\": \"Avenida Ipiranga\",\n  \"number\": \"6681\",\n  \"complement\": \"Bloco B\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/address",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "address"]
+            }
+          }
+        },
+        {
+          "name": "09 - Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"luis\",\n  \"password\": \"verde123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "10 - Change Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"verde123\",\n  \"newPassword\": \"novasenha123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "password"]
+            }
+          }
+        },
+        {
+          "name": "11 - Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "5"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Path",
+      "item": [
+        {
+          "name": "01 - Create User - 400 Validation Errors",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": null,\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"login\": \"ab\",\n  \"password\": \"short\",\n  \"address\": {\n    \"zipCode\": \"\",\n    \"countryCode\": \"BRA\",\n    \"stateCode\": \"SP\",\n    \"city\": \"São Paulo\",\n    \"street\": \"Avenida Paulista\",\n    \"number\": null,\n    \"complement\": null\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "02 - Create User - 400 Malformed Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"ADMIN\",\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@email.com\",\n  \"login\": \"joao.silva\",\n  \"password\": \"minhasenha123\",\n  \"address\": {\n    \"zipCode\": \"01310-100\",\n    \"countryCode\": \"BR\",\n    \"stateCode\": \"SP\",\n    \"city\": \"São Paulo\",\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"1000\",\n    \"complement\": null\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "03 - Create User - 409 Duplicate Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"CUSTOMER\",\n  \"name\": \"Another User\",\n  \"email\": \"luis@email.com\",\n  \"login\": \"another.user\",\n  \"password\": \"minhasenha123\",\n  \"address\": {\n    \"zipCode\": \"01310-100\",\n    \"countryCode\": \"BR\",\n    \"stateCode\": \"SP\",\n    \"city\": \"São Paulo\",\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"1000\",\n    \"complement\": null\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "04 - Create User - 409 Duplicate Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"CUSTOMER\",\n  \"name\": \"Another User\",\n  \"email\": \"another.user@email.com\",\n  \"login\": \"luis\",\n  \"password\": \"minhasenha123\",\n  \"address\": {\n    \"zipCode\": \"01310-100\",\n    \"countryCode\": \"BR\",\n    \"stateCode\": \"SP\",\n    \"city\": \"São Paulo\",\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"1000\",\n    \"complement\": null\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "05 - Update User - 400 Validation Errors",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": null,\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"login\": \"ab\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "06 - Update User - 400 Malformed Request",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"ADMIN\",\n  \"name\": \"Luís\",\n  \"email\": \"luis@email.com\",\n  \"login\": \"luis\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "07 - Update User - 404 Not Found",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"CUSTOMER\",\n  \"name\": \"Ghost User\",\n  \"email\": \"ghost@email.com\",\n  \"login\": \"ghost\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/9999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "9999"]
+            }
+          }
+        },
+        {
+          "name": "08 - Update User - 409 Duplicate Credentials",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"CUSTOMER\",\n  \"name\": \"Luís\",\n  \"email\": \"natalia@email.com\",\n  \"login\": \"luis\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "09 - Delete User - 404 Not Found",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/9999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "9999"]
+            }
+          }
+        },
+        {
+          "name": "10 - Update Address - 400 Validation Errors",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zipCode\": \"\",\n  \"countryCode\": \"BRA\",\n  \"stateCode\": \"\",\n  \"city\": \"\",\n  \"street\": \"\",\n  \"number\": null,\n  \"complement\": null\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/address",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "address"]
+            }
+          }
+        },
+        {
+          "name": "11 - Update Address - 400 Malformed Request",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/address",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "address"]
+            }
+          }
+        },
+        {
+          "name": "12 - Update Address - 404 Not Found",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zipCode\": \"90035-190\",\n  \"countryCode\": \"BR\",\n  \"stateCode\": \"RS\",\n  \"city\": \"Porto Alegre\",\n  \"street\": \"Avenida Ipiranga\",\n  \"number\": \"6681\",\n  \"complement\": null\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/9999/address",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "9999", "address"]
+            }
+          }
+        },
+        {
+          "name": "13 - Change Password - 400 Validation Errors",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"\",\n  \"newPassword\": \"short\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "password"]
+            }
+          }
+        },
+        {
+          "name": "14 - Change Password - 400 Malformed Request",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "password"]
+            }
+          }
+        },
+        {
+          "name": "15 - Change Password - 401 Wrong Current Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"wrongpassword\",\n  \"newPassword\": \"novasenha123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1/password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "1", "password"]
+            }
+          }
+        },
+        {
+          "name": "16 - Change Password - 404 Not Found",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"verde123\",\n  \"newPassword\": \"novasenha123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/9999/password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "9999", "password"]
+            }
+          }
+        },
+        {
+          "name": "17 - Login - 400 Validation Errors",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"\",\n  \"password\": \"\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "18 - Login - 400 Malformed Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "19 - Login - 401 Wrong Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"luis\",\n  \"password\": \"wrongpassword123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "20 - Login - 401 Unknown Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"unknownuser\",\n  \"password\": \"verde123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "21 - 404 Unknown Route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/unknown",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "unknown"]
+            }
+          }
+        },
+        {
+          "name": "22 - 400 Invalid Path Parameter",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/fsa",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users", "fsa"]
+            }
+          }
+        },
+        {
+          "name": "23 - 405 Method Not Allowed",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

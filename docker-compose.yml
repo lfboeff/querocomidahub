@@ -1,0 +1,58 @@
+# =============================================================================
+# Docker Compose configuration for the QueroComidaHub application
+# This file defines the services, networks, and volumes for the application.
+# =============================================================================
+
+name: querocomidahub
+
+services:
+
+  db:
+    image: mysql:8.4
+    container_name: querocomidahub-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD?DB_ROOT_PASSWORD must be set in .env}
+      MYSQL_USER: ${DB_USER_NAME?DB_USER_NAME must be set in .env}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD?DB_USER_PASSWORD must be set in .env}
+      MYSQL_DATABASE: querocomidahub_db
+      TZ: UTC
+    volumes:
+      - db-volume:/var/lib/mysql
+    networks:
+      - int-network
+    healthcheck:
+      test: [ "CMD-SHELL", "mysql -u $DB_USER_NAME -p$DB_USER_PASSWORD -e 'SELECT 1;'" ]
+      start_period: 30s
+      timeout: 5s
+      interval: 10s
+      retries: 3
+
+  app:
+    build: .
+    container_name: querocomidahub-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://db:3306/querocomidahub_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: ${DB_USER_NAME}
+      DB_USER_PASSWORD: ${DB_USER_PASSWORD}
+      TZ: UTC
+    networks:
+      - int-network
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:9090/actuator/health" ]
+      start_period: 30s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    stop_grace_period: 25s
+
+networks:
+  int-network:
+    driver: bridge
+
+volumes:
+  db-volume:

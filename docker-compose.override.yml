@@ -1,0 +1,17 @@
+# =============================================================================
+# Local development overrides - automatically merged by Docker Compose.
+# Never use this file in production.
+# =============================================================================
+
+services:
+
+  db:
+    # Expose DB port locally, so we can connect with DBeaver, MySQL Workbench, etc.
+    ports:
+      - "3306:3306"
+
+  app:
+    # Expose app ports locally, so we can access the API and Actuator endpoints from the host machine
+    ports:
+      - "8080:8080"
+      - "9090:9090"
